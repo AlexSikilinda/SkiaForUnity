@@ -8,6 +8,7 @@
         "iOS",
         "LinuxStandalone64",
         "macOSStandalone",
+        "WSA",
         "WindowsStandalone32",
         "WindowsStandalone64"
     ],
