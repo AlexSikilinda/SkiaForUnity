@@ -117,7 +117,7 @@ namespace SkiaSharp
 			private static readonly IntPtr libEGL;
 			private static readonly IntPtr libGLESv2;
 
-#if WINDOWS_UWP
+#if ENABLE_WINMD_SUPPORT && UNITY_WSA
 			// https://msdn.microsoft.com/en-us/library/windows/desktop/mt186421(v=vs.85).aspx
 
 			[DllImport ("api-ms-win-core-libraryloader-l2-1-0.dll", SetLastError = true, CharSet = CharSet.Ansi)]
@@ -128,7 +128,7 @@ namespace SkiaSharp
 
 			private static IntPtr LoadLibrary (string lpFileName) => LoadPackagedLibrary(lpFileName, 0);
 #else
-			[DllImport ("Kernel32.dll", SetLastError = true, CharSet = CharSet.Ansi)]
+            [DllImport ("Kernel32.dll", SetLastError = true, CharSet = CharSet.Ansi)]
 			private static extern IntPtr LoadLibrary ([MarshalAs (UnmanagedType.LPStr)] string lpFileName);
 
 			[DllImport ("Kernel32.dll", SetLastError = true, CharSet = CharSet.Ansi)]

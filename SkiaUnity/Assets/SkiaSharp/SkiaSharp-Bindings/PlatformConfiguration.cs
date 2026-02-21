@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-#if WINDOWS_UWP
+#if ENABLE_WINMD_SUPPORT && UNITY_WSA
 using Windows.ApplicationModel;
 using Windows.System;
 #endif
@@ -28,7 +28,7 @@ namespace SkiaSharp
 
 		static PlatformConfiguration ()
 		{
-#if WINDOWS_UWP
+#if ENABLE_WINMD_SUPPORT && UNITY_WSA
 			IsMac = false;
 			IsLinux = false;
 			IsUnix = false;
@@ -38,7 +38,7 @@ namespace SkiaSharp
 			const ProcessorArchitecture arm64 = (ProcessorArchitecture)12;
 			IsArm = arch == ProcessorArchitecture.Arm || arch == arm64;
 #else
-			IsMac = RuntimeInformation.IsOSPlatform (OSPlatform.OSX);
+            IsMac = RuntimeInformation.IsOSPlatform (OSPlatform.OSX);
 			IsLinux = RuntimeInformation.IsOSPlatform (OSPlatform.Linux);
 			IsUnix = IsMac || IsLinux;
 			IsWindows = RuntimeInformation.IsOSPlatform (OSPlatform.Windows);
@@ -71,10 +71,10 @@ namespace SkiaSharp
 			set => linuxFlavor = value;
 		}
 
-#if WINDOWS_UWP
+#if ENABLE_WINMD_SUPPORT && UNITY_WSA
 		public static bool IsGlibc { get; }
 #else
-		private static readonly Lazy<bool> isGlibcLazy = new Lazy<bool> (IsGlibcImplementation);
+        private static readonly Lazy<bool> isGlibcLazy = new Lazy<bool> (IsGlibcImplementation);
 
 		public static bool IsGlibc => IsLinux && isGlibcLazy.Value;
 

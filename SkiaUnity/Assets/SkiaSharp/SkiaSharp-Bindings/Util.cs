@@ -4,7 +4,7 @@ using System;
 using System.Buffers;
 using System.ComponentModel;
 using System.Text;
-#if NETSTANDARD1_3 || WINDOWS_UWP
+#if NETSTANDARD1_3 || ENABLE_WINMD_SUPPORT && UNITY_WSA
 using System.Reflection;
 #endif
 
@@ -113,13 +113,13 @@ namespace SkiaSharp
 				scope.Span;
 		}
 
-#if NETSTANDARD1_3 || WINDOWS_UWP
+#if NETSTANDARD1_3 || ENABLE_WINMD_SUPPORT && UNITY_WSA
 		internal static bool IsAssignableFrom (this Type type, Type c) =>
 			type.GetTypeInfo ().IsAssignableFrom (c.GetTypeInfo ());
 #endif
-	}
+    }
 
-	public unsafe static class StringUtilities
+    public unsafe static class StringUtilities
 	{
 		internal const string NullTerminator = "\0";
 

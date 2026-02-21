@@ -62,8 +62,8 @@ namespace HarfBuzzSharp
 
 		internal static int SizeOf<T> ()
 		{
-#if WINDOWS_UWP || NETSTANDARD || NET5_0_OR_GREATER
-			return Marshal.SizeOf<T> ();
+#if ENABLE_WINMD_SUPPORT && UNITY_WSA || NETSTANDARD || NET5_0_OR_GREATER
+            return Marshal.SizeOf<T> ();
 #else
 			return Marshal.SizeOf (typeof (T));
 #endif
